@@ -18,10 +18,12 @@ namespace UploadImage.Controllers
             this._productRepo = productRepo;
         }
         [HttpPost]
-        public ActionResult Add(ProductWriteDTO productWriteDTO)
+        public ActionResult<ProductReadDTO> Add(ProductWriteDTO productWriteDTO)
         {
-            _productRepo.Add(productWriteDTO);
-            return Ok();
+            var product = new Product { Id = Guid.NewGuid(), Name = productWriteDTO.Name };
+            _productRepo.Add(product);
+            var productReadDTO = new ProductReadDTO() { Id = product.Id, Name = product.Name };
+            return productReadDTO;
         }
     }
 }

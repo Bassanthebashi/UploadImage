@@ -12,9 +12,9 @@ namespace UploadImage.Data.Repositories
         {
             this._context = context;
         }
-        public void Add(ProductWriteDTO productWriteDTO)
+        public void Add(Product product)
         {
-            _context.Products.Add(new Product { Id = Guid.NewGuid(), Name = productWriteDTO.Name });
+            _context.Products.Add(product);
             _context.SaveChanges();
         }
         public void FillProductImage(Guid productId, string savedFileName)
